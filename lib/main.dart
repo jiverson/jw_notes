@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:jwnotes_app/page/list_page.dart';
-// import 'package:tekartik_notepad_sqflite_app/provider/note_provider.dart';
+import 'package:jwnotes_app/provider/note_provider.dart';
 import 'package:tekartik_common_utils/common_utils_import.dart';
 import 'package:tekartik_app_platform/app_platform.dart';
 import 'package:tekartik_app_flutter_sqflite/sqflite.dart';
 
-// late DbNoteProvider noteProvider;
+late DbNoteProvider noteProvider;
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,13 +15,13 @@ Future main() async {
   if (!kIsWeb) {
     sqfliteWindowsFfiInit();
   }
-  // var packageName = 'com.activepoison.sqflite.jwnotes';
+  var packageName = 'com.activepoison.sqflite.jwnotes';
 
-  // var databaseFactory = getDatabaseFactory(packageName: packageName);
+  var databaseFactory = getDatabaseFactory(packageName: packageName);
 
-  // noteProvider = DbNoteProvider(databaseFactory);
+  noteProvider = DbNoteProvider(databaseFactory);
   // devPrint('/notepad Starting');
-  // await noteProvider.ready;
+  await noteProvider.ready;
   runApp(MyApp());
 }
 
@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'NotePad',
       theme: ThemeData(
         // This is the theme of your application.
